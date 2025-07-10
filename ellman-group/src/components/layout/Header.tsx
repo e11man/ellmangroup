@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/buttons';
 import { Menu, X } from 'lucide-react';
 import { SITE_CONFIG } from '@/lib/constants';

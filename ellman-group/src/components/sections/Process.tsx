@@ -147,7 +147,7 @@ export const Process = () => {
               </div>
               <h4 className="text-lg font-bold text-neutral-900 mb-2">Unlimited Revisions</h4>
               <p className="text-neutral-600 text-sm">
-                We work until you're 100% satisfied with the final result
+                We work until you&apos;re 100% satisfied with the final result
               </p>
             </div>
             <div className="text-center">

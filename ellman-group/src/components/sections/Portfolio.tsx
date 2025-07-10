@@ -41,7 +41,7 @@ export const Portfolio = () => {
           variants={fadeInUp}
           className="text-xl text-neutral-600 max-w-3xl mx-auto mb-12"
         >
-          See how we've helped organizations establish their online presence
+          See how we&apos;ve helped organizations establish their online presence
         </motion.p>
 
         {/* Filter Buttons */}
@@ -144,7 +144,7 @@ export const Portfolio = () => {
             Ready to Start Your Project?
           </h3>
           <p className="text-white/90 mb-6 max-w-2xl mx-auto">
-            Let's discuss how we can help your organization establish a strong online presence that converts visitors into clients.
+            Let&apos;s discuss how we can help your organization establish a strong online presence that converts visitors into clients.
           </p>
           <Button 
             variant="cta" 

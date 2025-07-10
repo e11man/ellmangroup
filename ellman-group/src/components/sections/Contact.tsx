@@ -59,11 +59,11 @@ export const Contact = () => {
         className="text-center mb-16"
       >
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
-          Let's Start Your Project
+                      Let&apos;s Start Your Project
         </h2>
         <p className="text-xl text-neutral-300 max-w-3xl mx-auto">
-          Ready to transform your online presence? Get in touch for a free consultation 
-          and let's discuss how we can help your organization grow.
+                      Ready to transform your online presence? Get in touch for a free consultation 
+            and let&apos;s discuss how we can help your organization grow.
         </p>
       </motion.div>
 
@@ -86,7 +86,7 @@ export const Contact = () => {
                 Thank You!
               </h3>
               <p className="text-neutral-600">
-                Your message has been sent successfully. We'll get back to you within 24 hours.
+                Your message has been sent successfully. We&apos;ll get back to you within 24 hours.
               </p>
             </motion.div>
           ) : (

@@ -64,7 +64,7 @@ export const About = () => {
                 </h3>
                 <p className="text-neutral-600">
                   As a current student at {SITE_CONFIG.university}, I bring fresh perspectives and cutting-edge 
-                  web development techniques to every project, ensuring your website stands out in today's digital landscape.
+                  web development techniques to every project, ensuring your website stands out in today&apos;s digital landscape.
                 </p>
               </div>
             </div>
