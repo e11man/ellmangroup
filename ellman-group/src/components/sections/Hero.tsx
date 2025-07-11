@@ -5,8 +5,22 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/buttons';
 import { ArrowRight, Play, Star } from 'lucide-react';
 import { fadeInUp } from '@/lib/animations';
+import { useContent } from '@/hooks/useContent';
 
 export const Hero = () => {
+  const { getContent } = useContent();
+
+  const badgeText = getContent('hero', 'badge', 'text') || 'Trusted by 15+ Organizations';
+  const mainHeadline = getContent('hero', 'headline', 'main') || 'Premium Websites That Convert Visitors Into Clients';
+  const highlightText = getContent('hero', 'headline', 'highlight') || 'Convert Visitors Into Clients';
+  const subheadline = getContent('hero', 'subheadline', 'description') || 'Specializing in professional web solutions for churches, local governments, and landscaping businesses';
+  const primaryCTA = getContent('hero', 'cta', 'primary') || 'View Our Work';
+  const secondaryCTA = getContent('hero', 'cta', 'secondary') || 'Watch Demo';
+  const responseGuarantee = getContent('hero', 'trust-indicators', 'response') || '24-hour response guarantee';
+  const consultation = getContent('hero', 'trust-indicators', 'consultation') || 'Free 30-minute consultation';
+  const support = getContent('hero', 'trust-indicators', 'support') || 'Ongoing support included';
+  const scrollText = getContent('hero', 'scroll-indicator', 'text') || 'Scroll to explore';
+
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-hero overflow-hidden">
       {/* Background Pattern */}
@@ -32,7 +46,7 @@ export const Hero = () => {
             {/* Badge */}
             <motion.div variants={fadeInUp} className="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
               <Star className="w-4 h-4 text-yellow-400 mr-2" />
-              <span className="text-sm font-medium">Trusted by 15+ Organizations</span>
+              <span className="text-sm font-medium">{badgeText}</span>
             </motion.div>
 
             {/* Main Headline */}
@@ -42,7 +56,7 @@ export const Hero = () => {
             >
               Premium Websites That{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-accent-400">
-                Convert Visitors Into Clients
+                {highlightText}
               </span>
             </motion.h1>
 
@@ -51,7 +65,7 @@ export const Hero = () => {
               variants={fadeInUp}
               className="text-xl sm:text-2xl text-neutral-200 max-w-3xl mx-auto leading-relaxed"
             >
-              Specializing in professional web solutions for churches, local governments, and landscaping businesses
+              {subheadline}
             </motion.p>
 
             {/* CTA Buttons */}
@@ -66,7 +80,7 @@ export const Hero = () => {
                 iconPosition="right"
                 className="w-full sm:w-auto"
               >
-                View Our Work
+                {primaryCTA}
               </Button>
               <Button 
                 variant="outline" 
@@ -74,7 +88,7 @@ export const Hero = () => {
                 icon={<Play className="w-5 h-5" />}
                 className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10"
               >
-                Watch Demo
+                {secondaryCTA}
               </Button>
             </motion.div>
 
@@ -85,15 +99,15 @@ export const Hero = () => {
             >
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 bg-accent-400 rounded-full"></div>
-                <span className="text-sm">24-hour response guarantee</span>
+                <span className="text-sm">{responseGuarantee}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 bg-accent-400 rounded-full"></div>
-                <span className="text-sm">Free 30-minute consultation</span>
+                <span className="text-sm">{consultation}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 bg-accent-400 rounded-full"></div>
-                <span className="text-sm">Ongoing support included</span>
+                <span className="text-sm">{support}</span>
               </div>
             </motion.div>
           </motion.div>
@@ -108,7 +122,7 @@ export const Hero = () => {
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
       >
         <div className="flex flex-col items-center text-white/60">
-          <span className="text-sm mb-2">Scroll to explore</span>
+          <span className="text-sm mb-2">{scrollText}</span>
           <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
             <motion.div 
               animate={{ y: [0, 12, 0] }}

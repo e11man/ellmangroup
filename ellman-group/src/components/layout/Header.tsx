@@ -5,18 +5,22 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/buttons';
 import { Menu, X } from 'lucide-react';
-import { SITE_CONFIG } from '@/lib/constants';
-
-const navigation = [
-  { name: 'Services', href: '#services' },
-  { name: 'Portfolio', href: '#portfolio' },
-  { name: 'About', href: '#about' },
-  { name: 'Process', href: '#process' },
-  { name: 'Contact', href: '#contact' },
-];
+import { useContent } from '@/hooks/useContent';
 
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { getContent } = useContent();
+
+  const logo = getContent('header', undefined, 'logo') || 'Ellman Group';
+  const ctaButton = getContent('header', 'cta', 'button') || 'Get Started';
+  
+  const navigation = [
+    { name: getContent('navigation', 'nav', 'services') || 'Services', href: '#services' },
+    { name: getContent('navigation', 'nav', 'portfolio') || 'Portfolio', href: '#portfolio' },
+    { name: getContent('navigation', 'nav', 'about') || 'About', href: '#about' },
+    { name: getContent('navigation', 'nav', 'process') || 'Process', href: '#process' },
+    { name: getContent('navigation', 'nav', 'contact') || 'Contact', href: '#contact' },
+  ];
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-neutral-200">
@@ -25,7 +29,7 @@ export const Header = () => {
           {/* Logo */}
           <div className="flex items-center">
             <a href="#" className="text-2xl font-bold text-primary-600">
-              {SITE_CONFIG.name}
+              {logo}
             </a>
           </div>
 
@@ -45,7 +49,7 @@ export const Header = () => {
           {/* CTA Button */}
           <div className="hidden lg:flex items-center">
             <Button variant="cta" size="md">
-              Get Started
+              {ctaButton}
             </Button>
           </div>
 
@@ -89,7 +93,7 @@ export const Header = () => {
               ))}
               <div className="pt-4">
                 <Button variant="cta" size="md" className="w-full">
-                  Get Started
+                  {ctaButton}
                 </Button>
               </div>
             </div>

@@ -1,112 +1,29 @@
-# Ellman Group - Premium Web Development
+# Ellman Group - Dynamic Content Management System
 
-A premium, professional website for Ellman Group - a web development agency specializing in creating websites for churches, local governments, and landscaping businesses.
+A modern website for Ellman Group with a comprehensive content management system that allows dynamic editing of all website content through an admin dashboard.
 
-## 🚀 Project Overview
+## Features
 
-This website showcases the expertise and professionalism of Ellman Group, positioning Josh Ellman as the premium choice for web development in their niche markets. The site demonstrates the quality of work clients can expect through its own design and functionality.
+- **Dynamic Content Management**: All website text content is stored in MongoDB and can be edited through the admin dashboard
+- **Admin Dashboard**: Complete content management interface with section-based organization
+- **Real-time Updates**: Content changes are reflected immediately on the website
+- **Responsive Design**: Modern, mobile-friendly design with smooth animations
+- **SEO Optimized**: Built with Next.js for optimal performance and SEO
 
-## 🎯 Target Clients
+## Tech Stack
 
-- **Churches**: Professional websites with sermon streaming, event management, and community features
-- **Local Governments**: Citizen portals with document management and public information access
-- **Landscaping Businesses**: Portfolio showcases with booking systems and estimate calculators
-
-## 🛠️ Technical Stack
-
-- **Framework**: Next.js 14+ with App Router
-- **Styling**: Tailwind CSS with custom design system
+- **Frontend**: Next.js 15, React 19, TypeScript
+- **Styling**: Tailwind CSS 4
+- **Database**: MongoDB with Mongoose
 - **Animations**: Framer Motion
 - **Icons**: Lucide React
-- **Deployment**: Vercel-optimized
-- **Performance**: 90+ Lighthouse scores target
-- **Responsive**: Mobile-first design
 
-## 🏗️ Architecture
-
-```
-src/
-├── app/
-│   ├── globals.css
-│   ├── layout.tsx
-│   └── page.tsx
-├── components/
-│   ├── ui/
-│   │   ├── buttons/
-│   │   │   ├── Button.tsx
-│   │   │   └── index.ts
-│   │   ├── Section.tsx
-│   │   └── index.ts
-│   ├── sections/
-│   │   ├── Hero.tsx
-│   │   ├── Services.tsx
-│   │   ├── Portfolio.tsx
-│   │   ├── About.tsx
-│   │   ├── Process.tsx
-│   │   ├── Contact.tsx
-│   │   └── index.ts
-│   └── layout/
-│       ├── Header.tsx
-│       ├── Footer.tsx
-│       └── index.ts
-├── lib/
-│   ├── utils.ts
-│   ├── constants.ts
-│   └── animations.ts
-└── public/
-    └── assets/
-```
-
-## 🎨 Design System
-
-### Color Palette
-- **Primary**: Modern Blue (#2563eb)
-- **Secondary**: Sophisticated Gray (#64748b)
-- **Accent**: Success Green (#10b981)
-- **Neutral**: Clean grays for text and backgrounds
-
-### Typography
-- **Display**: 4rem (64px) - Hero headlines
-- **H1**: 3rem (48px) - Page titles
-- **H2**: 2.25rem (36px) - Section headers
-- **H3**: 1.5rem (24px) - Subsections
-- **Body**: 1rem (16px) - Regular text
-
-### Components
-- Modular, reusable components with consistent prop patterns
-- Highly customizable through props
-- Barrel exports for clean imports
-- TypeScript interfaces for type safety
-
-## 📱 Features
-
-### Core Sections
-1. **Hero**: Compelling headline with trust indicators and CTAs
-2. **Services**: Three main service areas with detailed features
-3. **Portfolio**: Filterable case studies with results
-4. **About**: Josh's story and company values
-5. **Process**: 5-step development methodology
-6. **Contact**: Form with consultation CTA
-
-### Interactive Elements
-- Smooth scroll animations with Framer Motion
-- Hover effects and micro-interactions
-- Responsive navigation with mobile menu
-- Form validation and submission states
-- Portfolio filtering by category
-
-### Performance Optimizations
-- Next.js Image optimization
-- Dynamic imports for code splitting
-- Lazy loading for below-fold content
-- Optimized fonts and assets
-- SEO metadata and structured data
-
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
+
 - Node.js 18+ 
-- npm or yarn
+- MongoDB (local or MongoDB Atlas)
 
 ### Installation
 
@@ -121,61 +38,134 @@ cd ellman-group
 npm install
 ```
 
-3. Run the development server:
+3. Set up environment variables:
+```bash
+cp .env.local.example .env.local
+```
+
+Edit `.env.local` and add your MongoDB connection string:
+```
+MONGODB_URI=mongodb://localhost:27017/ellman-group
+```
+
+4. Seed the database with initial content:
+```bash
+npm run seed
+```
+
+5. Start the development server:
 ```bash
 npm run dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+6. Open your browser and navigate to:
+   - Website: http://localhost:3000
+   - Admin Dashboard: http://localhost:3000/admin
 
-### Build for Production
+## Content Management
 
-```bash
-npm run build
-npm start
+### Admin Dashboard
+
+Access the admin dashboard at `/admin` to manage all website content:
+
+- **Dashboard**: Overview of content statistics and quick actions
+- **Content Management**: Edit content organized by sections:
+  - Header & Navigation
+  - Hero Section
+  - Services
+  - About
+  - Process
+  - Contact
+  - Footer
+
+### Content Structure
+
+Content is organized by:
+- **Section**: Main website sections (header, hero, services, etc.)
+- **Subsection**: Sub-categories within sections (nav, cta, features, etc.)
+- **Key**: Specific content identifiers (title, description, button, etc.)
+- **Type**: Content type (text, title, description, button, badge, feature, stat)
+
+### Adding/Editing Content
+
+1. Navigate to the Content Management tab
+2. Select the section you want to edit
+3. Click "Edit" on any content item
+4. Make your changes and click "Save"
+5. Changes are immediately reflected on the website
+
+## Database Schema
+
+The content is stored in a `sitecontents` collection with the following structure:
+
+```typescript
+interface SiteContent {
+  section: string;           // Main section (header, hero, services, etc.)
+  subsection?: string;       // Subsection (nav, cta, features, etc.)
+  key: string;              // Content identifier
+  value: string;            // Actual content text
+  type: string;             // Content type
+  order: number;            // Display order
+  isActive: boolean;        // Whether content is active
+  createdAt: Date;          // Creation timestamp
+  updatedAt: Date;          // Last update timestamp
+}
 ```
 
-## 📊 Performance Goals
+## API Endpoints
 
-- **Lighthouse Scores**: 90+ across all metrics
-- **Accessibility**: WCAG 2.1 AA compliance
-- **SEO**: Proper meta tags and structured data
-- **Conversion**: Optimized user flow and CTAs
+- `GET /api/content` - Fetch all active content
+- `POST /api/content` - Create new content item
+- `PUT /api/content/[id]` - Update content item
+- `DELETE /api/content/[id]` - Delete content item
+- `POST /api/seed` - Seed database with initial content
 
-## 🎯 Success Metrics
+## Development
 
-- **Professional Appearance**: Premium look that inspires confidence
-- **User Experience**: Intuitive navigation and clear value proposition
-- **Conversion Optimization**: Multiple contact points and clear CTAs
-- **Performance**: Fast loading times and smooth interactions
+### Project Structure
 
-## 🔧 Customization
+```
+src/
+├── app/                    # Next.js app directory
+│   ├── admin/             # Admin dashboard pages
+│   ├── api/               # API routes
+│   └── page.tsx           # Main website page
+├── components/            # React components
+│   ├── layout/           # Layout components (Header, Footer)
+│   ├── sections/         # Page sections (Hero, Services, etc.)
+│   └── ui/               # Reusable UI components
+├── hooks/                # Custom React hooks
+├── lib/                  # Utilities and configurations
+└── models/               # Database models
+```
 
-### Content Updates
-- Update business information in `src/lib/constants.ts`
-- Modify service details and portfolio items
-- Adjust contact information and social links
+### Available Scripts
 
-### Styling Changes
-- Modify design tokens in `tailwind.config.ts`
-- Update component variants and styles
-- Customize animations in `src/lib/animations.ts`
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm run seed` - Seed database with initial content
 
-### Adding Features
-- Create new components in the appropriate directories
-- Follow the established patterns for props and exports
-- Maintain consistency with the design system
+## Deployment
 
-## 📝 License
+1. Build the application:
+```bash
+npm run build
+```
 
-This project is proprietary to Ellman Group. All rights reserved.
+2. Set up your production MongoDB connection string in environment variables
 
-## 👨‍💻 Developer
+3. Deploy to your preferred platform (Vercel, Netlify, etc.)
 
-**Josh Ellman** - Student at Taylor University
-- Email: josh@ellmangroup.com
-- Location: Taylor University Area
+## Contributing
 
----
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
 
-*Built with ❤️ using Next.js and Tailwind CSS*
+## License
+
+This project is licensed under the MIT License.

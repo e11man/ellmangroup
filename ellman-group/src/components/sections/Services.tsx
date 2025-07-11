@@ -4,8 +4,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Section } from '@/components/ui/Section';
 import { Church, Building2, Trees } from 'lucide-react';
-import { SERVICES } from '@/lib/constants';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
+import { useContent } from '@/hooks/useContent';
 
 const serviceIcons = {
   church: Church,
@@ -14,6 +14,47 @@ const serviceIcons = {
 };
 
 export const Services = () => {
+  const { getContent } = useContent();
+
+  const title = getContent('services', undefined, 'title') || 'Professional Web Development';
+  const subtitle = getContent('services', undefined, 'subtitle') || 'Tailored solutions designed to meet the unique needs of your organization';
+  
+  const services = [
+    {
+      title: getContent('services', 'features', 'church_title') || 'Church Websites',
+      description: getContent('services', 'features', 'church_description') || 'Professional websites that connect congregations and communities',
+      features: [
+        getContent('services', 'features', 'church_feature1') || 'Sermon streaming integration',
+        getContent('services', 'features', 'church_feature2') || 'Event management systems',
+        getContent('services', 'features', 'church_feature3') || 'Donation platforms',
+        getContent('services', 'features', 'church_feature4') || 'Community features'
+      ],
+      icon: 'church'
+    },
+    {
+      title: getContent('services', 'features', 'government_title') || 'Government Portals',
+      description: getContent('services', 'features', 'government_description') || 'Citizen-focused digital services for local governments',
+      features: [
+        getContent('services', 'features', 'government_feature1') || 'Citizen service portals',
+        getContent('services', 'features', 'government_feature2') || 'Document management',
+        getContent('services', 'features', 'government_feature3') || 'Meeting schedules',
+        getContent('services', 'features', 'government_feature4') || 'Public information access'
+      ],
+      icon: 'government'
+    },
+    {
+      title: getContent('services', 'features', 'landscaping_title') || 'Landscaping Business Sites',
+      description: getContent('services', 'features', 'landscaping_description') || 'Showcase your work and streamline operations',
+      features: [
+        getContent('services', 'features', 'landscaping_feature1') || 'Portfolio galleries',
+        getContent('services', 'features', 'landscaping_feature2') || 'Service booking systems',
+        getContent('services', 'features', 'landscaping_feature3') || 'Estimate calculators',
+        getContent('services', 'features', 'landscaping_feature4') || 'Seasonal promotions'
+      ],
+      icon: 'landscaping'
+    }
+  ];
+
   return (
     <Section id="services" background="muted" padding="xl">
       <motion.div
@@ -27,13 +68,13 @@ export const Services = () => {
           variants={fadeInUp}
           className="text-3xl sm:text-4xl lg:text-5xl font-bold text-neutral-900 mb-6"
         >
-          Professional Web Development
+          {title}
         </motion.h2>
         <motion.p 
           variants={fadeInUp}
           className="text-xl text-neutral-600 max-w-3xl mx-auto"
         >
-          Tailored solutions designed to meet the unique needs of your organization
+          {subtitle}
         </motion.p>
       </motion.div>
 
@@ -44,7 +85,7 @@ export const Services = () => {
         viewport={{ once: true }}
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
       >
-        {SERVICES.map((service, index) => {
+        {services.map((service, index) => {
           const IconComponent = serviceIcons[service.icon as keyof typeof serviceIcons];
           
           return (
@@ -89,26 +130,38 @@ export const Services = () => {
       >
         <div className="bg-white rounded-2xl p-8 shadow-soft border border-neutral-100 max-w-4xl mx-auto">
           <h3 className="text-2xl font-bold text-neutral-900 mb-4">
-            Why Choose Ellman Group?
+            {getContent('services', 'stats', 'why_choose_title') || 'Why Choose Ellman Group?'}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center">
               <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-primary-600">90+</span>
+                <span className="text-2xl font-bold text-primary-600">
+                  {getContent('services', 'stats', 'lighthouse_score') || '90+'}
+                </span>
               </div>
-              <p className="text-neutral-600">Lighthouse Score</p>
+              <p className="text-neutral-600">
+                {getContent('services', 'stats', 'lighthouse_label') || 'Lighthouse Score'}
+              </p>
             </div>
             <div className="text-center">
               <div className="w-12 h-12 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-accent-600">24h</span>
+                <span className="text-2xl font-bold text-accent-600">
+                  {getContent('services', 'stats', 'response_time') || '24h'}
+                </span>
               </div>
-              <p className="text-neutral-600">Response Time</p>
+              <p className="text-neutral-600">
+                {getContent('services', 'stats', 'response_label') || 'Response Time'}
+              </p>
             </div>
             <div className="text-center">
               <div className="w-12 h-12 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-secondary-600">100%</span>
+                <span className="text-2xl font-bold text-secondary-600">
+                  {getContent('services', 'stats', 'satisfaction') || '100%'}
+                </span>
               </div>
-              <p className="text-neutral-600">Client Satisfaction</p>
+              <p className="text-neutral-600">
+                {getContent('services', 'stats', 'satisfaction_label') || 'Client Satisfaction'}
+              </p>
             </div>
           </div>
         </div>
