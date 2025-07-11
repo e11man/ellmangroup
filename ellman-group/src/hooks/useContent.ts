@@ -38,12 +38,18 @@ export function useContent() {
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred');
         console.error('Error fetching content:', err);
+        // Don't set loading to false on error to allow fallback content
       } finally {
         setLoading(false);
       }
     };
 
-    fetchContent();
+    // Only fetch on client side
+    if (typeof window !== 'undefined') {
+      fetchContent();
+    } else {
+      setLoading(false);
+    }
   }, []);
 
   const getContent = (section: string, subsection?: string, key?: string): any => {
